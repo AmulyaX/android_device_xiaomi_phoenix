@@ -172,7 +172,8 @@ PRODUCT_COPY_FILES += \
 
 # IMS
 PRODUCT_PACKAGES += \
-    ims-ext-common 
+    ims-ext-common \
+    ims_ext_common.xml
 
 # Userdata checkpoint
  PRODUCT_PACKAGES += \
