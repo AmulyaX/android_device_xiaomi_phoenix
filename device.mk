@@ -17,6 +17,9 @@
 # For QSSI builds, we skip building the system image. Instead we build the
 # "non-system" images (that we support).
 
+# Enable updating of APEXes
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
 PRODUCT_TARGET_VNDK_VERSION := 29
 PRODUCT_SHIPPING_API_LEVEL := 29
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
