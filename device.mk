@@ -22,6 +22,11 @@ PRODUCT_SHIPPING_API_LEVEL := 29
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_BUILD_PRODUCT_IMAGE := true
 
+# Audio
+PRODUCT_PACKAGES += \
+    android.hardware.audio@5.0-impl \
+    android.hardware.audio.effect@5.0-impl 
+
 # ANT+
 PRODUCT_PACKAGES += \
     AntHalService \
