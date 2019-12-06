@@ -20,6 +20,9 @@
 # Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
+# Setup dalvik vm configs
+$(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
+
 PRODUCT_TARGET_VNDK_VERSION := 29
 PRODUCT_SHIPPING_API_LEVEL := 29
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
@@ -65,14 +68,6 @@ PRODUCT_PACKAGES += \
 
 # privapp-permissions whitelisting (To Fix CTS :privappPermissionsMustBeEnforced)
 PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
-
-#Inherit all except heap growth limit from phone-xhdpi-2048-dalvik-heap.mk
-PRODUCT_PROPERTY_OVERRIDES  += \
-        dalvik.vm.heapstartsize=8m \
-        dalvik.vm.heapsize=512m \
-        dalvik.vm.heaptargetutilization=0.75 \
-        dalvik.vm.heapminfree=512k \
-        dalvik.vm.heapmaxfree=8m
 
 DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := device/qcom/common/compatibility_matrix.xml
