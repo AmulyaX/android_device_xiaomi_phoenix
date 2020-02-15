@@ -23,6 +23,13 @@ TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := generic
 
+# Assert
+TARGET_OTA_ASSERT_DEVICE := phoenix,phoenixin
+
+# Init
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_phoenix
+TARGET_RECOVERY_DEVICE_MODULES := libinit_phoenix
+
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
