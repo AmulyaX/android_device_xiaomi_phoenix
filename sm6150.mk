@@ -334,6 +334,10 @@ else
 	PRODUCT_COPY_FILES += device/qcom/$(MSMSTEPPE)/manifest-generic.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml
 endif
 
+# Target specific Netflix custom property
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.netflix.bsp_rev=Q6150-17263-1
+
 ###################################################################################
 # This is the End of target.mk file.
 # Now, Pickup other split product.mk files:
