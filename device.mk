@@ -37,17 +37,15 @@ endif
 PRODUCT_BUILD_RAMDISK_IMAGE := true
 PRODUCT_BUILD_USERDATA_IMAGE := true
 
-ifeq ($(SHIPPING_API_LEVEL),29)
- # f2fs utilities
+# F2FS utilities
  PRODUCT_PACKAGES += \
      sg_write_buffer \
      f2fs_io \
      check_f2fs
 
- # Userdata checkpoint
+# Userdata checkpoint
  PRODUCT_PACKAGES += \
      checkpoint_gc
-endif
 
 # privapp-permissions whitelisting (To Fix CTS :privappPermissionsMustBeEnforced)
 PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
