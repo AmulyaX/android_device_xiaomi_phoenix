@@ -50,11 +50,6 @@ PRODUCT_BUILD_USERDATA_IMAGE := true
 # privapp-permissions whitelisting (To Fix CTS :privappPermissionsMustBeEnforced)
 PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
 
-#target name, shall be used in all makefiles
-MSMSTEPPE = sm6150
-TARGET_DEFINES_DALVIK_HEAP := true
-$(call inherit-product, device/qcom/qssi/common64.mk)
-
 #Inherit all except heap growth limit from phone-xhdpi-2048-dalvik-heap.mk
 PRODUCT_PROPERTY_OVERRIDES  += \
         dalvik.vm.heapstartsize=8m \
@@ -63,29 +58,9 @@ PRODUCT_PROPERTY_OVERRIDES  += \
         dalvik.vm.heapminfree=512k \
         dalvik.vm.heapmaxfree=8m
 
-TARGET_KERNEL_VERSION := 4.14
-# default is nosdcard, S/W button enabled in resource
-PRODUCT_CHARACTERISTICS := nosdcard
-BOARD_FRP_PARTITION_NAME := frp
-
 # Kernel modules install path
 KERNEL_MODULES_INSTALL := dlkm
 KERNEL_MODULES_OUT := out/target/product/$(PRODUCT_NAME)/$(KERNEL_MODULES_INSTALL)/lib/modules
-
-
-#Android EGL implementation
-PRODUCT_PACKAGES += libGLES_android
-
--include $(QCPATH)/common/config/qtic-config.mk
-
-
-PRODUCT_BOOT_JARS += tcmiface
-
-TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
-
-TARGET_DISABLE_QTI_VPP := true
-
-PRODUCT_PACKAGES += android.hardware.media.omx@1.0-impl
 
 # Audio configuration file
 -include $(TOPDIR)vendor/qcom/opensource/audio-hal/primary-hal/configs/msmsteppe/msmsteppe.mk
@@ -220,9 +195,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Property to disable ZSL mode
 PRODUCT_PROPERTY_OVERRIDES += \
     camera.disable_zsl_mode=1
-
-PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE:=true
-TARGET_MOUNT_POINTS_SYMLINKS := false
 
 PRODUCT_PROPERTY_OVERRIDES += \
 			ro.crypto.volume.filenames_mode = "aes-256-cts" \
