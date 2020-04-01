@@ -281,8 +281,6 @@ PRODUCT_COPY_FILES += \
 
 ifneq ($(GENERIC_ODM_IMAGE),true)
 	PRODUCT_COPY_FILES += $(LOCAL_PATH)/manifest-qva.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml
-else
-	PRODUCT_COPY_FILES += $(LOCAL_PATH)/manifest-generic.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml
 endif
 
 # Target specific Netflix custom property
