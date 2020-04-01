@@ -16,6 +16,10 @@
 
 # For QSSI builds, we skip building the system image. Instead we build the
 # "non-system" images (that we support).
+
+BOARD_DYNAMIC_PARTITION_ENABLE := true
+PRODUCT_SHIPPING_API_LEVEL := 29
+
 ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
 PRODUCT_BUILD_SYSTEM_IMAGE := false
 else
@@ -30,24 +34,6 @@ PRODUCT_BUILD_CACHE_IMAGE := true
 endif
 PRODUCT_BUILD_RAMDISK_IMAGE := true
 PRODUCT_BUILD_USERDATA_IMAGE := true
-
-# Also, since we're going to skip building the system image, we also skip
-# building the OTA package. We'll build this at a later step. We also don't
-# need to build the OTA tools package (we'll use the one from the system build).
-TARGET_SKIP_OTA_PACKAGE := true
-TARGET_SKIP_OTATOOLS_PACKAGE := true
-
-# By default this target is ota config, so set the default shipping level to 28 (if not set explictly earlier)
-SHIPPING_API_LEVEL ?= 28
-
-# Enable Dynamic partitions only for Q new launch devices.
-ifeq ($(SHIPPING_API_LEVEL),29)
-  BOARD_DYNAMIC_PARTITION_ENABLE := true
-  PRODUCT_SHIPPING_API_LEVEL := 29
-else ifeq ($(SHIPPING_API_LEVEL),28)
-  BOARD_DYNAMIC_PARTITION_ENABLE := false
-  $(call inherit-product, build/make/target/product/product_launched_with_p.mk)
-endif
 
 ifeq ($(SHIPPING_API_LEVEL),29)
  # f2fs utilities
@@ -76,21 +62,6 @@ PRODUCT_PROPERTY_OVERRIDES  += \
         dalvik.vm.heaptargetutilization=0.75 \
         dalvik.vm.heapminfree=512k \
         dalvik.vm.heapmaxfree=8m
-
-#Initial bringup flags
-TARGET_USES_AOSP := false
-TARGET_USES_AOSP_FOR_AUDIO := false
-TARGET_USES_QCOM_BSP := false
-
-ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
-  $(warning "Compiling with full value-added framework")
-else
-  $(warning "Compiling without full value-added framework - enabling GENERIC_ODM_IMAGE")
-  GENERIC_ODM_IMAGE := true
-endif
-
-# RRO configuration
-TARGET_USES_RRO := true
 
 TARGET_KERNEL_VERSION := 4.14
 # default is nosdcard, S/W button enabled in resource
@@ -176,10 +147,6 @@ PRODUCT_PACKAGES += \
     android.hardware.configstore@1.1-service \
     android.hardware.broadcastradio@1.0-impl
 
-PRODUCT_HOST_PACKAGES += \
-    brillo_update_payload \
-    configstore_xmlparser
-
 # MSM IRQ Balancer configuration file
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
 
@@ -201,8 +168,6 @@ PRODUCT_PACKAGES += \
 # MIDI feature
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml
-
-PRODUCT_RESTRICT_VENDOR_FILES := false
 
 # Media Configs
 PRODUCT_COPY_FILES += \
@@ -260,38 +225,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_VENDOR_MOVE_ENABLED := true
 
-#----------------------------------------------------------------------
-# wlan specific
-#----------------------------------------------------------------------
-include device/qcom/wlan/talos/wlan.mk
-
-# Enable vndk-sp Librarie
-PRODUCT_PACKAGES += vndk_package
-
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE:=true
 TARGET_MOUNT_POINTS_SYMLINKS := false
 
 PRODUCT_PROPERTY_OVERRIDES += \
 			ro.crypto.volume.filenames_mode = "aes-256-cts" \
 			ro.crypto.allow_encrypt_override = true
-
+# HIDL
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/manifest_sdmmagpie.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_365.xml \
-    $(LOCAL_PATH)/manifest_sdmmagpie.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_366.xml
-
-ifneq ($(GENERIC_ODM_IMAGE),true)
-	PRODUCT_COPY_FILES += $(LOCAL_PATH)/manifest-qva.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml
-endif
+    $(LOCAL_PATH)/manifest_sdmmagpie.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_366.xml \
+    $(LOCAL_PATH)/manifest-qva.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml
 
 # Target specific Netflix custom property
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.netflix.bsp_rev=Q6150-17263-1
-
-###################################################################################
-# This is the End of target.mk file.
-# Now, Pickup other split product.mk files:
-###################################################################################
-# TODO: Relocate the system product.mk files pickup into qssi lunch, once it is up.
-$(call inherit-product-if-exists, vendor/qcom/defs/product-defs/system/*.mk)
-$(call inherit-product-if-exists, vendor/qcom/defs/product-defs/vendor/*.mk)
-###################################################################################
