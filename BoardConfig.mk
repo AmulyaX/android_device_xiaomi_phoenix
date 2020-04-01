@@ -54,6 +54,9 @@ TARGET_NO_RPC := true
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 TARGET_INIT_VENDOR_LIB := libinit_msm
 
+# Media
+TARGET_USES_MEDIA_EXTENSIONS := true
+
 # Treble
 BOARD_VNDK_VERSION:= current
 
