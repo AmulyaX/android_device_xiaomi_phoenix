@@ -101,10 +101,6 @@ PRODUCT_PROPERTY_OVERRIDES  += \
         dalvik.vm.heaptargetutilization=0.75 \
         dalvik.vm.heapminfree=512k \
         dalvik.vm.heapmaxfree=8m
-PRODUCT_NAME := $(MSMSTEPPE)
-PRODUCT_DEVICE := $(MSMSTEPPE)
-PRODUCT_BRAND := qti
-PRODUCT_MODEL := $(MSMSTEPPE) for arm64
 
 #Initial bringup flags
 TARGET_USES_AOSP := false
@@ -206,12 +202,12 @@ PRODUCT_PACKAGES += \
   update_engine_sideload
 endif
 
-DEVICE_MANIFEST_FILE := device/qcom/$(MSMSTEPPE)/manifest.xml
+DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
 ifeq ($(ENABLE_AB), true)
-DEVICE_MANIFEST_FILE += device/qcom/$(MSMSTEPPE)/manifest_ab.xml
+DEVICE_MANIFEST_FILE += $(LOCAL_PATH)/manifest_ab.xml
 endif
 DEVICE_MATRIX_FILE := device/qcom/common/compatibility_matrix.xml
-DEVICE_FRAMEWORK_MANIFEST_FILE := device/qcom/$(MSMSTEPPE)/framework_manifest.xml
+DEVICE_FRAMEWORK_MANIFEST_FILE := $(LOCAL_PATH)/framework_manifest.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
     vendor/qcom/opensource/core-utils/vendor_framework_compatibility_matrix.xml
 
@@ -221,7 +217,7 @@ PRODUCT_PACKAGES += \
 
 # Adding vendor manifest
 PRODUCT_COPY_FILES += \
-    device/qcom/$(MSMSTEPPE)/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
+    $(LOCAL_PATH)/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
 
 #audio related module
 PRODUCT_PACKAGES += libvolumelistener
@@ -235,10 +231,10 @@ PRODUCT_HOST_PACKAGES += \
     configstore_xmlparser
 
 # MSM IRQ Balancer configuration file
-PRODUCT_COPY_FILES += device/qcom/$(MSMSTEPPE)/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
 
 # Powerhint configuration file
-PRODUCT_COPY_FILES += device/qcom/$(MSMSTEPPE)/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
 # Camera configuration file. Shared by passthrough/binderized camera HAL
 PRODUCT_PACKAGES += camera.device@3.2-impl
@@ -264,7 +260,7 @@ PRODUCT_PACKAGES += \
 
 # Sensor conf files
 PRODUCT_COPY_FILES += \
-    device/qcom/$(MSMSTEPPE)/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf \
+    $(LOCAL_PATH)/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.compass.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.compass.xml \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.gyroscope.xml \
@@ -325,13 +321,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 			ro.crypto.allow_encrypt_override = true
 
 PRODUCT_COPY_FILES += \
-    device/qcom/$(MSMSTEPPE)/manifest_sdmmagpie.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_365.xml \
-    device/qcom/$(MSMSTEPPE)/manifest_sdmmagpie.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_366.xml
+    $(LOCAL_PATH)/manifest_sdmmagpie.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_365.xml \
+    $(LOCAL_PATH)/manifest_sdmmagpie.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_366.xml
 
 ifneq ($(GENERIC_ODM_IMAGE),true)
-	PRODUCT_COPY_FILES += device/qcom/$(MSMSTEPPE)/manifest-qva.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml
+	PRODUCT_COPY_FILES += $(LOCAL_PATH)/manifest-qva.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml
 else
-	PRODUCT_COPY_FILES += device/qcom/$(MSMSTEPPE)/manifest-generic.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml
+	PRODUCT_COPY_FILES += $(LOCAL_PATH)/manifest-generic.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml
 endif
 
 # Target specific Netflix custom property

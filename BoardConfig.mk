@@ -1,7 +1,21 @@
-# config.mk
 #
-# Product-specific compile-time definitions.
+# Copyright (C) 2020 Potato Open Sauce Project
 #
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+DEVICE_PATH := device/xiaomi/phoenix
+
 TARGET_BOARD_PLATFORM := $(MSMSTEPPE)
 TARGET_SEPOLICY_DIR := msmsteppe
 TARGET_BOOTLOADER_BOARD_NAME := $(MSMSTEPPE)
@@ -19,7 +33,7 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a9
 
-BOARD_SECCOMP_POLICY := device/qcom/$(TARGET_BOARD_PLATFORM)/seccomp
+BOARD_SECCOMP_POLICY := $(DEVICE_PATH)/seccomp
 
 TARGET_NO_BOOTLOADER := false
 TARGET_USES_UEFI := true
@@ -71,15 +85,15 @@ endif
 
 ifeq ($(ENABLE_AB), true)
   ifeq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
-    TARGET_RECOVERY_FSTAB := device/qcom/$(MSMSTEPPE)/recovery_AB_dynamic_variant.fstab
+    TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery_AB_dynamic_variant.fstab
   else
-    TARGET_RECOVERY_FSTAB := device/qcom/$(MSMSTEPPE)/recovery_AB_variant.fstab
+    TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery_AB_variant.fstab
   endif
 else
   ifeq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
-    TARGET_RECOVERY_FSTAB := device/qcom/$(MSMSTEPPE)/recovery_non-AB_dynamic_variant.fstab
+    TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery_non-AB_dynamic_variant.fstab
   else
-    TARGET_RECOVERY_FSTAB := device/qcom/$(MSMSTEPPE)/recovery_non-AB_variant.fstab
+    TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery_non-AB_variant.fstab
   endif
 endif
 
@@ -188,7 +202,7 @@ TARGET_USES_NEW_ION_API :=true
 TARGET_USES_QCOM_BSP := false
 BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 androidboot.hardware=qcom androidboot.console=ttyMSM0 androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=1 androidboot.usbcontroller=a600000.dwc3 earlycon=msm_geni_serial,0x880000 loop.max_part=7 cgroup.memory=nokmem,nosocket
 
-BOARD_EGL_CFG := device/qcom/$(TARGET_BOARD_PLATFORM)/egl.cfg
+BOARD_EGL_CFG := $(DEVICE_PATH)/egl.cfg
 
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
