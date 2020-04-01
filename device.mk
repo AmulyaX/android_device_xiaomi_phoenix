@@ -299,7 +299,8 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
     init.recovery.qcom.rc \
-    ueventd.qcom.rc
+    ueventd.qcom.rc \
+    init.mi_thermald.rc
 
 # RCS
 PRODUCT_PACKAGES += \
