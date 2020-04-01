@@ -14,9 +14,6 @@
 # limitations under the License.
 #
 
-# Default A/B configuration.
-ENABLE_AB ?= true
-
 # For QSSI builds, we skip building the system image. Instead we build the
 # "non-system" images (that we support).
 ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
@@ -29,9 +26,6 @@ PRODUCT_BUILD_VENDOR_IMAGE := true
 PRODUCT_BUILD_PRODUCT_IMAGE := false
 PRODUCT_BUILD_PRODUCT_SERVICES_IMAGE := false
 PRODUCT_BUILD_ODM_IMAGE := false
-ifeq ($(ENABLE_AB), true)
-PRODUCT_BUILD_CACHE_IMAGE := false
-else
 PRODUCT_BUILD_CACHE_IMAGE := true
 endif
 PRODUCT_BUILD_RAMDISK_IMAGE := true
@@ -68,14 +62,6 @@ ifeq ($(SHIPPING_API_LEVEL),29)
  # Userdata checkpoint
  PRODUCT_PACKAGES += \
      checkpoint_gc
-
- ifeq ($(ENABLE_AB), true)
-  AB_OTA_POSTINSTALL_CONFIG += \
-      RUN_POSTINSTALL_vendor=true \
-      POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
-      FILESYSTEM_TYPE_vendor=ext4 \
-      POSTINSTALL_OPTIONAL_vendor=true
- endif
 endif
 
 ifneq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
@@ -89,11 +75,6 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_PACKAGES += fastbootd
 # Add default implementation of fastboot HAL.
 PRODUCT_PACKAGES += android.hardware.fastboot@1.0-impl-mock
-ifeq ($(ENABLE_AB), true)
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/fstab_AB_dynamic_partition.qti:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
-else
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/fstab_non_AB_dynamic_partition.qti:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
-endif
 BOARD_AVB_VBMETA_SYSTEM := system
 BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
 BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048
@@ -196,32 +177,7 @@ PRODUCT_PACKAGES += $(AUDIO_DLKM)
 
 PRODUCT_PACKAGES += fs_config_files
 
-ifeq ($(ENABLE_AB), true)
-#A/B related packages
-PRODUCT_PACKAGES += update_engine \
-    update_engine_client \
-    update_verifier \
-    bootctrl.$(MSMSTEPPE) \
-    android.hardware.boot@1.0-impl \
-    android.hardware.boot@1.0-service
-
-#Boot control HAL test app
-PRODUCT_PACKAGES_DEBUG += bootctl
-
-PRODUCT_STATIC_BOOT_CONTROL_HAL := \
-  bootctrl.$(MSMSTEPPE) \
-  librecovery_updater_msm \
-  libz \
-  libcutils
-
-PRODUCT_PACKAGES += \
-  update_engine_sideload
-endif
-
 DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
-ifeq ($(ENABLE_AB), true)
-DEVICE_MANIFEST_FILE += $(LOCAL_PATH)/manifest_ab.xml
-endif
 DEVICE_MATRIX_FILE := device/qcom/common/compatibility_matrix.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := $(LOCAL_PATH)/framework_manifest.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
