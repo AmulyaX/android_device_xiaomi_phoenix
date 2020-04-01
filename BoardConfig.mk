@@ -14,7 +14,6 @@
 # limitations under the License.
 #
 
-BOARD_VENDOR := xiaomi
 DEVICE_PATH := device/xiaomi/phoenix
 
 # Architecture
@@ -31,6 +30,10 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 
 TARGET_USES_64_BIT_BINDER := true
+
+# Platform
+BOARD_VENDOR := xiaomi
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno618
 
 # Android Verified Boot
 BOARD_AVB_ENABLE := true
