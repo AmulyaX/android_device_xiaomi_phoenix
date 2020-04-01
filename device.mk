@@ -17,8 +17,10 @@
 # For QSSI builds, we skip building the system image. Instead we build the
 # "non-system" images (that we support).
 
-BOARD_DYNAMIC_PARTITION_ENABLE := true
+PRODUCT_TARGET_VNDK_VERSION := 29
 PRODUCT_SHIPPING_API_LEVEL := 29
+BOARD_DYNAMIC_PARTITION_ENABLE := true
+
 
 ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
 PRODUCT_BUILD_SYSTEM_IMAGE := false
