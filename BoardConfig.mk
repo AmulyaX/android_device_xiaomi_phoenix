@@ -69,6 +69,9 @@ TARGET_INIT_VENDOR_LIB := libinit_msm
 # Media
 TARGET_USES_MEDIA_EXTENSIONS := true
 
+# Recovery
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/recovery.fstab
+
 # Treble
 BOARD_VNDK_VERSION:= current
 
@@ -93,8 +96,6 @@ BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 # Non-A/B section. Define cache and recovery partition variables.
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/recovery.fstab
 
 ### Dynamic partition Handling
 ifneq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
@@ -125,12 +126,6 @@ BOARD_EXT4_SHARE_DUP_BLOCKS := true
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x06000000
 endif
 ### Dynamic partition Handling
-
-ifeq ($(SHIPPING_API_LEVEL),29)
-  BOARD_SYSTEMSDK_VERSIONS:=29
-else
-  BOARD_SYSTEMSDK_VERSIONS:=28
-endif
 
 #Enable split vendor image
 ENABLE_VENDOR_IMAGE := true
@@ -200,20 +195,7 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(shell pwd)/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-androidkernel-
 TARGET_USES_UNCOMPRESSED_KERNEL := false
-
-BOARD_USES_GENERIC_AUDIO := true
-
-
-
-
-
 TARGET_COMPILE_WITH_MSM_KERNEL := true
-
-#Enable PD locater/notifier
-TARGET_PD_SERVICE_ENABLED := true
-
-#Enable peripheral manager
-TARGET_PER_MGR_ENABLED := true
 
 # Enable dex pre-opt to speed up initial boot
 ifeq ($(HOST_OS),linux)
@@ -226,42 +208,3 @@ ifeq ($(HOST_OS),linux)
       endif
     endif
 endif
-
-
-# Enable sensor multi HAL
-USE_SENSOR_MULTI_HAL := true
-
-# Enable sensor Version V_2
-USE_SENSOR_HAL_VER := 2.0
-
-#Add non-hlos files to ota packages
-ADD_RADIO_FILES := true
-
-#Enable LM
-TARGET_USES_LM := true
-
-# Enable QG user space
-PMIC_QG_SUPPORT := true
-
-ifeq ($(ENABLE_VENDOR_IMAGE), false)
-$(error "Vendor Image is mandatory !!")
-endif
-
-#----------------------------------------------------------------------
-# wlan specific
-#----------------------------------------------------------------------
-ifeq ($(strip $(BOARD_HAS_QCOM_WLAN)),true)
-include device/qcom/wlan/talos/BoardConfigWlan.mk
-endif
-
-BUILD_BROKEN_DUP_RULES := true
-BUILD_BROKEN_PHONY_TARGETS := true
-
-#################################################################################
-# This is the End of BoardConfig.mk file.
-# Now, Pickup other split Board.mk files:
-#################################################################################
-# TODO: Relocate the system Board.mk files pickup into qssi lunch, once it is up.
--include vendor/qcom/defs/board-defs/system/*.mk
--include vendor/qcom/defs/board-defs/vendor/*.mk
-#################################################################################
