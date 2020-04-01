@@ -17,6 +17,7 @@
 BOARD_VENDOR := xiaomi
 DEVICE_PATH := device/xiaomi/phoenix
 
+# Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
@@ -24,10 +25,10 @@ TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := generic
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a9
+TARGET_2ND_CPU_VARIANT := generic
 
 TARGET_USES_64_BIT_BINDER := true
 
@@ -37,6 +38,24 @@ TARGET_NO_BOOTLOADER := true
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth/include
+
+# Camera
+BOARD_QTI_CAMERA_32BIT_ONLY := true
+TARGET_USES_QTI_CAMERA_DEVICE := true
+
+# Crypto
+TARGET_HW_DISK_ENCRYPTION := true
+TARGET_HW_DISK_ENCRYPTION_PERF := true
+
+# GPS
+TARGET_NO_RPC := true
+
+# Init
+TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
+TARGET_INIT_VENDOR_LIB := libinit_msm
+
+# Treble
+BOARD_VNDK_VERSION:= current
 
 # QCOM
 BOARD_USES_QCOM_HARDWARE := true
@@ -175,11 +194,10 @@ TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(shell pwd)/prebuilts/gcc/linux-x86/aarch
 TARGET_USES_UNCOMPRESSED_KERNEL := false
 
 BOARD_USES_GENERIC_AUDIO := true
-BOARD_QTI_CAMERA_32BIT_ONLY := true
-TARGET_NO_RPC := true
 
-TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-TARGET_INIT_VENDOR_LIB := libinit_msm
+
+
+
 
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 
@@ -188,9 +206,6 @@ TARGET_PD_SERVICE_ENABLED := true
 
 #Enable peripheral manager
 TARGET_PER_MGR_ENABLED := true
-
-TARGET_HW_DISK_ENCRYPTION := true
-TARGET_HW_DISK_ENCRYPTION_PERF := true
 
 # Enable dex pre-opt to speed up initial boot
 ifeq ($(HOST_OS),linux)
@@ -231,7 +246,6 @@ ifeq ($(strip $(BOARD_HAS_QCOM_WLAN)),true)
 include device/qcom/wlan/talos/BoardConfigWlan.mk
 endif
 
-BOARD_VNDK_VERSION:= current
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_PHONY_TARGETS := true
 
