@@ -35,6 +35,9 @@ TARGET_USES_64_BIT_BINDER := true
 BOARD_VENDOR := xiaomi
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno618
 
+# ANT+
+BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
+
 # Android Verified Boot
 BOARD_AVB_ENABLE := true
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
