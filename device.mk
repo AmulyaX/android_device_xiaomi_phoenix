@@ -37,6 +37,10 @@ endif
 PRODUCT_BUILD_RAMDISK_IMAGE := true
 PRODUCT_BUILD_USERDATA_IMAGE := true
 
+# AID/fs configs
+PRODUCT_PACKAGES += \
+    fs_config_files
+
 # F2FS utilities
  PRODUCT_PACKAGES += \
      sg_write_buffer \
@@ -98,8 +102,6 @@ AUDIO_DLKM += audio_rx_macro.ko
 AUDIO_DLKM += audio_tx_macro.ko
 
 PRODUCT_PACKAGES += $(AUDIO_DLKM)
-
-PRODUCT_PACKAGES += fs_config_files
 
 DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := device/qcom/common/compatibility_matrix.xml
