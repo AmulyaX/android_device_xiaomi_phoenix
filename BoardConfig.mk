@@ -202,8 +202,6 @@ TARGET_USES_NEW_ION_API :=true
 TARGET_USES_QCOM_BSP := false
 BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 androidboot.hardware=qcom androidboot.console=ttyMSM0 androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=1 androidboot.usbcontroller=a600000.dwc3 earlycon=msm_geni_serial,0x880000 loop.max_part=7 cgroup.memory=nokmem,nosocket
 
-BOARD_EGL_CFG := $(DEVICE_PATH)/egl.cfg
-
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
@@ -213,10 +211,6 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(shell pwd)/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-androidkernel-
 TARGET_USES_UNCOMPRESSED_KERNEL := false
-
-MAX_EGL_CACHE_KEY_SIZE := 12*1024
-MAX_EGL_CACHE_SIZE := 2048*1024
-
 
 BOARD_USES_GENERIC_AUDIO := true
 BOARD_QTI_CAMERA_32BIT_ONLY := true
