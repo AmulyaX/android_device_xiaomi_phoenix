@@ -275,6 +275,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs_skunk.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs_skunk.xml \
     $(LOCAL_PATH)/configs/media_profiles_skunk.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_profiles_skunk.xml
 
+# Ramdisk
+PRODUCT_PACKAGES += \
+    init.target.rc \
+    fstab.qcom
+
 # USB default HAL
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service

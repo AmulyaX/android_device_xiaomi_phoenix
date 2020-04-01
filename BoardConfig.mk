@@ -83,19 +83,7 @@ ifeq ($(BOARD_AVB_ENABLE), true)
 endif
 endif
 
-ifeq ($(ENABLE_AB), true)
-  ifeq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
-    TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery_AB_dynamic_variant.fstab
-  else
-    TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery_AB_variant.fstab
-  endif
-else
-  ifeq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
-    TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery_non-AB_dynamic_variant.fstab
-  else
-    TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery_non-AB_variant.fstab
-  endif
-endif
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/recovery.fstab
 
 ### Dynamic partition Handling
 ifneq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
