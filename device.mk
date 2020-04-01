@@ -37,9 +37,6 @@ PRODUCT_BUILD_USERDATA_IMAGE := true
 TARGET_SKIP_OTA_PACKAGE := true
 TARGET_SKIP_OTATOOLS_PACKAGE := true
 
-# Enable AVB 2.0
-BOARD_AVB_ENABLE := true
-
 # By default this target is ota config, so set the default shipping level to 28 (if not set explictly earlier)
 SHIPPING_API_LEVEL ?= 28
 
@@ -62,25 +59,6 @@ ifeq ($(SHIPPING_API_LEVEL),29)
  # Userdata checkpoint
  PRODUCT_PACKAGES += \
      checkpoint_gc
-endif
-
-ifneq ($(strip $(BOARD_DYNAMIC_PARTITION_ENABLE)),true)
-# Enable chain partition for system, to facilitate system-only OTA in Treble.
-BOARD_AVB_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
-BOARD_AVB_SYSTEM_ALGORITHM := SHA256_RSA2048
-BOARD_AVB_SYSTEM_ROLLBACK_INDEX := 0
-BOARD_AVB_SYSTEM_ROLLBACK_INDEX_LOCATION := 2
-else
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
-PRODUCT_PACKAGES += fastbootd
-# Add default implementation of fastboot HAL.
-PRODUCT_PACKAGES += android.hardware.fastboot@1.0-impl-mock
-BOARD_AVB_VBMETA_SYSTEM := system
-BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
-BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048
-BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 2
-$(call inherit-product, build/make/target/product/gsi_keys.mk)
 endif
 
 # privapp-permissions whitelisting (To Fix CTS :privappPermissionsMustBeEnforced)
@@ -286,11 +264,6 @@ PRODUCT_VENDOR_MOVE_ENABLED := true
 # wlan specific
 #----------------------------------------------------------------------
 include device/qcom/wlan/talos/wlan.mk
-
-# dm-verity definitions
-ifneq ($(BOARD_AVB_ENABLE), true)
- PRODUCT_SUPPORTS_VERITY := true
-endif
 
 # Enable vndk-sp Librarie
 PRODUCT_PACKAGES += vndk_package
