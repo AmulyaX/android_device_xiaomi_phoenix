@@ -111,61 +111,22 @@ PRODUCT_VENDOR_MOVE_ENABLED := true
 # QCOM
 BOARD_USES_QCOM_HARDWARE := true
 
-
-TARGET_KERNEL_VERSION := 4.14
-BOARD_PREBUILT_DTBOIMAGE := out/target/product/sm6150/prebuilt_dtbo.img
-BOARD_VENDOR_KERNEL_MODULES := \
-    $(KERNEL_MODULES_OUT)/audio_apr.ko \
-    $(KERNEL_MODULES_OUT)/audio_snd_event.ko \
-    $(KERNEL_MODULES_OUT)/audio_wglink.ko \
-    $(KERNEL_MODULES_OUT)/audio_q6_pdr.ko \
-    $(KERNEL_MODULES_OUT)/audio_q6_notifier.ko \
-    $(KERNEL_MODULES_OUT)/audio_adsp_loader.ko \
-    $(KERNEL_MODULES_OUT)/audio_q6.ko \
-    $(KERNEL_MODULES_OUT)/audio_usf.ko \
-    $(KERNEL_MODULES_OUT)/audio_pinctrl_wcd.ko \
-    $(KERNEL_MODULES_OUT)/audio_pinctrl_lpi.ko \
-    $(KERNEL_MODULES_OUT)/audio_swr.ko \
-    $(KERNEL_MODULES_OUT)/audio_wcd_core.ko \
-    $(KERNEL_MODULES_OUT)/audio_swr_ctrl.ko \
-    $(KERNEL_MODULES_OUT)/audio_wsa881x.ko \
-    $(KERNEL_MODULES_OUT)/audio_platform.ko \
-    $(KERNEL_MODULES_OUT)/audio_hdmi.ko \
-    $(KERNEL_MODULES_OUT)/audio_stub.ko \
-    $(KERNEL_MODULES_OUT)/audio_wcd9xxx.ko \
-    $(KERNEL_MODULES_OUT)/audio_mbhc.ko \
-    $(KERNEL_MODULES_OUT)/audio_wcd934x.ko \
-    $(KERNEL_MODULES_OUT)/audio_wcd937x.ko \
-    $(KERNEL_MODULES_OUT)/audio_wcd937x_slave.ko \
-    $(KERNEL_MODULES_OUT)/audio_bolero_cdc.ko \
-    $(KERNEL_MODULES_OUT)/audio_wsa_macro.ko \
-    $(KERNEL_MODULES_OUT)/audio_va_macro.ko \
-    $(KERNEL_MODULES_OUT)/audio_rx_macro.ko \
-    $(KERNEL_MODULES_OUT)/audio_tx_macro.ko \
-    $(KERNEL_MODULES_OUT)/audio_wcd_spi.ko \
-    $(KERNEL_MODULES_OUT)/audio_native.ko \
-    $(KERNEL_MODULES_OUT)/audio_machine_talos.ko \
-    $(KERNEL_MODULES_OUT)/wil6210.ko \
-    $(KERNEL_MODULES_OUT)/msm_11ad_proxy.ko \
-    $(KERNEL_MODULES_OUT)/mpq-adapter.ko \
-    $(KERNEL_MODULES_OUT)/mpq-dmx-hw-plugin.ko
-
-BOARD_VENDOR_KERNEL_MODULES += $(shell ls $(KERNEL_MODULES_OUT)/*.ko)
-TARGET_USES_ION := true
-TARGET_USES_NEW_ION_API :=true
-TARGET_USES_QCOM_BSP := false
-BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 androidboot.hardware=qcom androidboot.console=ttyMSM0 androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=1 androidboot.usbcontroller=a600000.dwc3 earlycon=msm_geni_serial,0x880000 loop.max_part=7 cgroup.memory=nokmem,nosocket
-
-BOARD_KERNEL_BASE        := 0x00000000
-BOARD_KERNEL_PAGESIZE    := 4096
-BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
-BOARD_RAMDISK_OFFSET     := 0x02000000
-
+# Kernel
+BOARD_RAMDISK_OFFSET := 0x01000000
+BOARD_KERNEL_TAGS_OFFSET := 0x00000100
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_KERNEL_SECOND_OFFSET := 0x00f00000
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_PAGESIZE := 4096
+BOARD_KERNEL_SEPARATED_DTBO := true
+BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 earlycon=msm_geni_serial,0x880000 androidboot.hardware=qcom androidboot.console=ttyMSM0 androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=1  loop.max_part=7 androidboot.usbcontroller=a600000.dwc3
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery
 TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(shell pwd)/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-androidkernel-
-TARGET_USES_UNCOMPRESSED_KERNEL := false
-TARGET_COMPILE_WITH_MSM_KERNEL := true
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+TARGET_KERNEL_CONFIG := phoenix_defconfig
+TARGET_KERNEL_CLANG_COMPILE := true
+TARGET_KERNEL_SOURCE := kernel/xiaomi/phoenix
 
 # Enable dex pre-opt to speed up initial boot
 ifeq ($(HOST_OS),linux)
