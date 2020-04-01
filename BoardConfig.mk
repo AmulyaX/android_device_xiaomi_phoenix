@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+BOARD_VENDOR := xiaomi
 DEVICE_PATH := device/xiaomi/phoenix
 
 TARGET_BOARD_PLATFORM := $(MSMSTEPPE)
