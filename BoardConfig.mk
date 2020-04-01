@@ -17,10 +17,6 @@
 BOARD_VENDOR := xiaomi
 DEVICE_PATH := device/xiaomi/phoenix
 
-TARGET_BOARD_PLATFORM := $(MSMSTEPPE)
-TARGET_SEPOLICY_DIR := msmsteppe
-TARGET_PERF_DIR := msmsteppe
-
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
@@ -32,17 +28,6 @@ TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a9
-
-BOARD_SECCOMP_POLICY := $(DEVICE_PATH)/seccomp
-
-TARGET_USES_UEFI := true
-TARGET_NO_KERNEL := false
-BOARD_PRESIL_BUILD := true
--include vendor/qcom/prebuilt/$(MSMSTEPPE)/BoardConfigVendor.mk
--include $(QCPATH)/common/$(MSMSTEPPE)/BoardConfigVendor.mk
-
-USE_OPENGL_RENDERER := true
-BOARD_USE_LEGACY_UI := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := sm6150
