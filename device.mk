@@ -125,6 +125,10 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     fstab.qcom
 
+# Screen Density
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+
 # USB default HAL
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
