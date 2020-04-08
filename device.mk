@@ -99,6 +99,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libbthost_if 
 
+# Camera
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service \
+    Snap
+
 # F2FS utilities
  PRODUCT_PACKAGES += \
      sg_write_buffer \
