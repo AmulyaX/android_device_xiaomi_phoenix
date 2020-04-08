@@ -278,7 +278,14 @@ PRODUCT_COPY_FILES += \
 # Ramdisk
 PRODUCT_PACKAGES += \
     init.target.rc \
-    fstab.qcom
+    fstab.qcom \
+    init.msm.usb.configfs.rc \
+    init.power.rc \
+    init.qcom.rc \
+    init.qcom.usb.rc \
+    init.qcom.usb.sh \
+    init.recovery.qcom.rc \
+    ueventd.qcom.rc
 
 # Screen Density
 PRODUCT_AAPT_CONFIG := normal
