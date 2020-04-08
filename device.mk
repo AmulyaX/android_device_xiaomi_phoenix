@@ -206,6 +206,12 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+    $(LOCAL_PATH)/configs/media/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
+    $(LOCAL_PATH)/configs/media/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
+    $(LOCAL_PATH)/configs/media/system_properties.xml:$(TARGET_COPY_OUT_VENDOR)/etc/system_properties.xml
+
 # Userdata checkpoint
  PRODUCT_PACKAGES += \
      checkpoint_gc
@@ -248,11 +254,6 @@ PRODUCT_PACKAGES += \
 # MIDI feature
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml
-
-# Media Configs
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/media_codecs_skunk.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs_skunk.xml \
-    $(LOCAL_PATH)/configs/media_profiles_skunk.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_profiles_skunk.xml
 
 # Ramdisk
 PRODUCT_PACKAGES += \
