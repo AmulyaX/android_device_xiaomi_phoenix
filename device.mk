@@ -95,6 +95,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     fs_config_files
 
+# Bluetooth
+PRODUCT_PACKAGES += \
+    libbthost_if 
+
 # F2FS utilities
  PRODUCT_PACKAGES += \
      sg_write_buffer \
