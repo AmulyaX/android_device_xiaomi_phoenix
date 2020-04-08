@@ -342,7 +342,11 @@ PRODUCT_PACKAGES += \
     qti_telephony_hidl_wrapper.xml \
     qti_telephony_utils.xml \
     qti-telephony-hidl-wrapper \
-    qti-telephony-utils
+    qti-telephony-utils \
+    telephony-ext
+
+PRODUCT_BOOT_JARS += \
+    telephony-ext
 
 # USB default HAL
 PRODUCT_PACKAGES += \
