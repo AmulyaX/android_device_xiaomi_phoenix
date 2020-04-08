@@ -371,6 +371,17 @@ PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-impl \
     android.hardware.vibrator@1.0-service \
 
+# Wifi
+PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service \
+    hostapd \
+    libwifi-hal-ctrl \
+    libwifi-hal-qcom \
+    libwpa_client \
+    wifi-mac-generator \
+    wpa_supplicant \
+    wpa_supplicant.conf
+
 #FEATURE_OPENGLES_EXTENSION_PACK support string config file
 
 
