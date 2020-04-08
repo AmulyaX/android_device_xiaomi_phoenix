@@ -136,7 +136,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.composer@1.0.vendor \
     vendor.qti.hardware.display.composer@2.0.vendor \
-    vendor.qti.hardware.display.mapper@1.1.vendor 
+    vendor.qti.hardware.display.mapper@1.1.vendor
+
+# DRM
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl \
+    android.hardware.drm@1.0-service \
+    android.hardware.drm@1.2-service.clearkey
 
 # F2FS utilities
  PRODUCT_PACKAGES += \
