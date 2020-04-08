@@ -118,6 +118,20 @@ PRODUCT_PACKAGES += \
     android.hardware.contexthub@1.0-impl.generic \
     android.hardware.contexthub@1.0-service
 
+# Display/Graphics
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.composer@2.3-service \
+    android.hardware.graphics.mapper@2.0-impl-qti-display \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service \
+    gralloc.sm6150 \
+    hwcomposer.sm6150 \
+    libdisplayconfig \
+    libtinyxml \
+    libvulkan \
+    memtrack.sm6150 \
+    vendor.qti.hardware.display.allocator-service
+
 # F2FS utilities
  PRODUCT_PACKAGES += \
      sg_write_buffer \
