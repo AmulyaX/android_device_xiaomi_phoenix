@@ -298,6 +298,16 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
 
+# RIL
+PRODUCT_PACKAGES += \
+    android.hardware.radio.config@1.0 \
+    android.hardware.radio@1.4 \
+    android.hardware.secure_element@1.0 \
+    libjson \
+    libprotobuf-cpp-full \
+    librmnetctl \
+    libxml2
+
 # Screen Density
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
