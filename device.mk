@@ -170,6 +170,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/gps/etc/,$(TARGET_COPY_OUT_VENDOR)/etc)
 
+# IMS
+PRODUCT_PACKAGES += \
+    ims-ext-common 
+
 # Userdata checkpoint
  PRODUCT_PACKAGES += \
      checkpoint_gc
