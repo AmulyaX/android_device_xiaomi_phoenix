@@ -358,6 +358,10 @@ PRODUCT_PACKAGES += \
     android.hardware.thermal@1.0-service \
     thermal.sm6150
 
+# Touchscreen
+PRODUCT_PACKAGES += \
+    libtinyxml2
+
 # USB default HAL
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
