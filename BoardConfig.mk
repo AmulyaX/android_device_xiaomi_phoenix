@@ -109,6 +109,11 @@ TARGET_USES_QTI_MAPPER_EXTENSIONS_1_1 := true
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 TARGET_INIT_VENDOR_LIB := libinit_msm
 
+# HIDL
+DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := device/qcom/common/compatibility_matrix.xml
+DEVICE_FRAMEWORK_MANIFEST_FILE := $(LOCAL_PATH)/framework_manifest.xml
+
 # Partitions
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_USES_PRODUCTIMAGE := true

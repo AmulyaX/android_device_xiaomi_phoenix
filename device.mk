@@ -97,7 +97,11 @@ PRODUCT_PACKAGES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    libbthost_if 
+    libbthost_if
+
+# BroadcastRadio
+PRODUCT_PACKAGES += \
+    android.hardware.broadcastradio@1.0-impl 
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -112,6 +116,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     com.android.media.swcodec \
     libsfplugin_ccodec
+
+# Configstore
+PRODUCT_PACKAGES += \
+    android.hardware.configstore@1.1-service
 
 # Context hub HAL
 PRODUCT_PACKAGES += \
@@ -131,6 +139,9 @@ PRODUCT_PACKAGES += \
     libvulkan \
     memtrack.sm6150 \
     vendor.qti.hardware.display.allocator-service
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
 
 # Display interfaces
 PRODUCT_PACKAGES += \
@@ -169,6 +180,16 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/gps/etc/,$(TARGET_COPY_OUT_VENDOR)/etc)
+
+# HIDL
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/manifest_sdmmagpie.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_365.xml \
+    $(LOCAL_PATH)/manifest_sdmmagpie.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_366.xml \
+    $(LOCAL_PATH)/manifest-qva.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml \
+    $(LOCAL_PATH)/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
+
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
+    vendor/qcom/opensource/core-utils/vendor_framework_compatibility_matrix.xml
 
 # IMS
 PRODUCT_PACKAGES += \
@@ -243,34 +264,12 @@ PRODUCT_COPY_FILES += \
 # privapp-permissions whitelisting (To Fix CTS :privappPermissionsMustBeEnforced)
 PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
 
-DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := device/qcom/common/compatibility_matrix.xml
-DEVICE_FRAMEWORK_MANIFEST_FILE := $(LOCAL_PATH)/framework_manifest.xml
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
-    vendor/qcom/opensource/core-utils/vendor_framework_compatibility_matrix.xml
-
-#Healthd packages
+# Healthd packages
 PRODUCT_PACKAGES += \
     libhealthd.msm
 
-# Adding vendor manifest
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
-
-#audio related module
-PRODUCT_PACKAGES += libvolumelistener
-
-PRODUCT_PACKAGES += \
-    android.hardware.configstore@1.1-service \
-    android.hardware.broadcastradio@1.0-impl
-
-# MSM IRQ Balancer configuration file
+# IRQ
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
-
-# Vibrator
-PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl \
-    android.hardware.vibrator@1.0-service \
 
 # MIDI feature
 PRODUCT_COPY_FILES += \
@@ -285,11 +284,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
-# USB default HAL
-PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service
-
-# Sensor conf files
+# Sensors
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
@@ -302,9 +297,17 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepdetector.xml \
     frameworks/native/data/etc/android.hardware.sensor.hifi_sensors.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.hifi_sensors.xml
 
+# USB default HAL
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service
+
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl \
+    android.hardware.vibrator@1.0-service \
+
 #FEATURE_OPENGLES_EXTENSION_PACK support string config file
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
+
 
 # system prop for opengles version
 #
@@ -325,11 +328,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 			ro.crypto.volume.filenames_mode = "aes-256-cts" \
 			ro.crypto.allow_encrypt_override = true
-# HIDL
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/manifest_sdmmagpie.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_365.xml \
-    $(LOCAL_PATH)/manifest_sdmmagpie.xml:$(TARGET_COPY_OUT_VENDOR)/odm/etc/vintf/manifest_366.xml \
-    $(LOCAL_PATH)/manifest-qva.xml:$(TARGET_COPY_OUT_ODM)/etc/vintf/manifest.xml
 
 # Target specific Netflix custom property
 PRODUCT_PROPERTY_OVERRIDES += \
