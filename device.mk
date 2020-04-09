@@ -181,8 +181,8 @@ PRODUCT_PACKAGES += \
     qcom.fmradio
 
 # Fingerprint feature
-PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/fingerprint/android.hardware.biometrics.fingerprint@2.1-service.xiaomi_phoenix.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.biometrics.fingerprint@2.1-service.xiaomi_phoenix.rc
+PRODUCT_PACKAGES += \
+     android.hardware.biometrics.fingerprint@2.1-service_phoenix
 
 # Framework detect
 PRODUCT_PACKAGES += \
