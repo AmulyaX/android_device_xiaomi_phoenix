@@ -124,10 +124,6 @@ TARGET_USES_ION := true
 TARGET_USES_QTI_MAPPER_2_0 := true
 TARGET_USES_QTI_MAPPER_EXTENSIONS_1_1 := true
 
-# Init
-TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-TARGET_INIT_VENDOR_LIB := libinit_msm
-
 # HIDL
 DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := device/qcom/common/compatibility_matrix.xml
@@ -193,8 +189,7 @@ include device/qcom/sepolicy/sepolicy.mk
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR := $(DEVICE_PATH)/sepolicy/private
 
 # Treble
-PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
-BOARD_VNDK_VERSION:= current
+BOARD_VNDK_VERSION := current
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_VENDOR_MOVE_ENABLED := true
 
