@@ -283,9 +283,10 @@ PRODUCT_COPY_FILES += \
  PRODUCT_PACKAGES += \
      checkpoint_gc
 
-# Healthd packages
+# Health hal
 PRODUCT_PACKAGES += \
-    libhealthd.msm
+    android.hardware.health@2.0-impl \
+    android.hardware.health@2.0-service
 
 # IRQ
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
