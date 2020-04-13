@@ -130,3 +130,4 @@ qemu.hw.mainkeys=0
 
 #Potato Specific Properties
 ro.potato.has_cutout=true
+ro.control_privapp_permissions=log

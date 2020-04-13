@@ -283,9 +283,6 @@ PRODUCT_COPY_FILES += \
  PRODUCT_PACKAGES += \
      checkpoint_gc
 
-# privapp-permissions whitelisting (To Fix CTS :privappPermissionsMustBeEnforced)
-PRODUCT_PROPERTY_OVERRIDES += ro.control_privapp_permissions=enforce
-
 # Healthd packages
 PRODUCT_PACKAGES += \
     libhealthd.msm
