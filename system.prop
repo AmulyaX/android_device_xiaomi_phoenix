@@ -127,3 +127,6 @@ config.disable_rtt=true
 persist.radio.atfwd.start=false
 ro.kernel.qemu.gles=0
 qemu.hw.mainkeys=0
+
+#Potato Specific Properties
+ro.potato.has_cutout=true
