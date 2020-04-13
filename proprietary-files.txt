@@ -1757,7 +1757,6 @@ lib64/libwfduibcsink.so
 lib64/libwfduibcsinkinterface.so
 lib64/libwfduibcsrc.so
 lib64/libwfduibcsrcinterface.so
--priv-app/WfdService/lib/arm64/libwfdnative.so
 -priv-app/WfdService/WfdService.apk
 vendor/bin/wifidisplayhalservice
 vendor/etc/init/com.qualcomm.qti.wifidisplayhal@1.0-service.rc
