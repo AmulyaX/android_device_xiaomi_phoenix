@@ -403,30 +403,3 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_BOOT_JARS += \
     WfdCommon
-
-#FEATURE_OPENGLES_EXTENSION_PACK support string config file
-
-
-# system prop for opengles version
-#
-# 196608 is decimal for 0x30000 to report version 3
-# 196609 is decimal for 0x30001 to report version 3.1
-# 196610 is decimal for 0x30002 to report version 3.2
-PRODUCT_PROPERTY_OVERRIDES  += \
-    ro.opengles.version=196610
-
-#vendor prop to enable advanced network scanning
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.radio.enableadvancedscan=true
-
-# Property to disable ZSL mode
-PRODUCT_PROPERTY_OVERRIDES += \
-    camera.disable_zsl_mode=1
-
-PRODUCT_PROPERTY_OVERRIDES += \
-			ro.crypto.volume.filenames_mode = "aes-256-cts" \
-			ro.crypto.allow_encrypt_override = true
-
-# Target specific Netflix custom property
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.netflix.bsp_rev=Q6150-17263-1
