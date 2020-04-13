@@ -146,7 +146,7 @@ TARGET_COPY_OUT_PRODUCT := product
 TARGET_COPY_OUT_ODM := odm
 
 # Properties
-ARGET_ODM_PROP += $(LOCAL_PATH)/odm.prop
+TARGET_ODM_PROP += $(LOCAL_PATH)/odm.prop
 
 # Media
 TARGET_USES_MEDIA_EXTENSIONS := true
