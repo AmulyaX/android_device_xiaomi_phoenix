@@ -178,6 +178,10 @@ PRODUCT_PACKAGES += \
      f2fs_io \
      check_f2fs
 
+# fastbootd
+PRODUCT_PACKAGES += \
+    fastbootd
+
 # FM
 PRODUCT_PACKAGES += \
     FM2 \
