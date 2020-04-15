@@ -322,6 +322,9 @@ PRODUCT_PACKAGES += \
     ueventd.qcom.rc \
     init.mi_thermald.rc
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
+
 # RCS
 PRODUCT_PACKAGES += \
     rcs_service_aidl \
