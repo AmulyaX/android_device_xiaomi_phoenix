@@ -32,3 +32,6 @@ sys.qca1530=detect
 sys.displayfeature_hidl=true
 
 vendor.hbm.enable=true
+
+# Display Cutout
+ro.potato.has_cutout=true
